@@ -20,6 +20,8 @@
   },
   "homepage": "https://github.com/brunohaf/web-tp11-cefet-web-geiser#readme",
   "dependencies": {
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "hbs": "^4.2.0",
+    "pug": "^3.0.2"
   }
 }

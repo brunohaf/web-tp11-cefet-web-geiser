@@ -1,8 +1,11 @@
 // importação de dependência(s)
 const express = require('express')
+const fs = require('fs')
+const hbs = require('hbs')
 
 
 // variáveis globais deste módulo
+let app = express();
 const PORT = 3000
 const db = {}
 
@@ -25,8 +28,14 @@ const db = {}
 // dados do banco de dados "data/jogadores.json" com a lista de jogadores
 // dica: o handler desta função é bem simples - basta passar para o template
 //       os dados do arquivo data/jogadores.json (~3 linhas)
-
-
+let core_path = process.cwd()
+//app.set('views', './views')
+app.set('view engine', 'hbs');
+app.set('views', core_path + '\\server\\views');
+let players = JSON.parse(fs.readFileSync(core_path + '\\server\\data\\jogadores.json', 'utf8'))
+app.get('/', function (req, res) {
+    res.render('index', {layout : 'index'})
+  })
 
 // EXERCÍCIO 3
 // definir rota para página de detalhes de um jogador --> renderizar a view
@@ -38,7 +47,7 @@ const db = {}
 // EXERCÍCIO 1
 // configurar para servir os arquivos estáticos da pasta "client"
 // dica: 1 linha de código
-let app = express();
+
 app.use(express.static('client'));
 app.listen(PORT)
 
